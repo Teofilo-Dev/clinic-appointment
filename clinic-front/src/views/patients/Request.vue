@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden relative">
     <!-- Animated Background Blobs -->
     <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -15,80 +15,105 @@
     </div>
 
     <!-- Fixed Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 border-b border-slate-200/50 animate-slide-down">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/10 animate-slide-down" style="background: linear-gradient(to right, #3b6fd4, #10d9a0);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center text-white font-bold">H</div>
-          <span class="font-bold text-lg text-slate-900">MagsCare</span>
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center font-bold text-sm sm:text-base" style="background:white;">
+            <span class="bg-gradient-to-br from-blue-500 to-emerald-400 bg-clip-text text-transparent">H</span>
+          </div>
+          <span class="font-bold text-base sm:text-lg text-white">MagsCare</span>
         </div>
-        <div class="hidden md:flex gap-8">
+        <!-- Desktop nav -->
+        <div class="hidden md:flex gap-6 lg:gap-8">
           <a
             v-for="item in navItems"
             :key="item.name"
             :href="item.link"
-            class="text-slate-600 hover:text-blue-600 font-medium transition-colors hover:scale-105"
+            class="text-white/90 hover:text-white font-medium transition-colors hover:scale-105 text-sm lg:text-base"
           >
             {{ item.name }}
           </a>
         </div>
-        <button @click="openBookingModal()" class="px-6 py-2 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-105 cursor-pointer">
-          Book Now
-        </button>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button @click="openBookingModal()" class="px-4 sm:px-6 py-2 bg-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-105 cursor-pointer text-sm sm:text-base" style="color: #3b6fd4;">
+            Book Now
+          </button>
+          <!-- Mobile hamburger -->
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg bg-white/20 hover:bg-white/30 transition cursor-pointer" aria-label="Toggle menu">
+            <span :class="['block w-5 h-0.5 bg-white transition-all duration-300', mobileMenuOpen ? 'rotate-45 translate-y-2' : '']"></span>
+            <span :class="['block w-5 h-0.5 bg-white transition-all duration-300', mobileMenuOpen ? 'opacity-0' : '']"></span>
+            <span :class="['block w-5 h-0.5 bg-white transition-all duration-300', mobileMenuOpen ? '-rotate-45 -translate-y-2' : '']"></span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile menu dropdown -->
+      <div v-if="mobileMenuOpen" class="md:hidden border-t border-white/20 px-4 pb-4" style="background: linear-gradient(to right, #3b6fd4, #10d9a0);">
+        <div class="flex flex-col gap-1 pt-2">
+          <a
+            v-for="item in navItems"
+            :key="item.name"
+            :href="item.link"
+            class="text-white hover:text-white font-medium py-2.5 px-3 rounded-lg hover:bg-white/20 transition-colors"
+            @click="mobileMenuOpen = false"
+          >
+            {{ item.name }}
+          </a>
+        </div>
       </div>
     </nav>
 
     <div class="relative z-10 pt-24">
       <!-- Hero Section -->
-      <section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+      <section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
           <!-- Left Content -->
-          <div class="space-y-8 animate-fade-in">
-            <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold animate-slide-right" style="animation-delay: 0.1s">
+          <div class="space-y-6 sm:space-y-8 animate-fade-in text-center lg:text-left">
+            <div class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold animate-slide-right" style="animation-delay: 0.1s">
               Welcome to Mags Clinic Centre
             </div>
 
-            <h1 class="text-6xl lg:text-7xl font-bold text-slate-900 leading-tight animate-slide-right" style="animation-delay: 0.2s">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 leading-tight animate-slide-right" style="animation-delay: 0.2s">
               Your Health <br />
               <span class="bg-gradient-to-r from-blue-500 via-emerald-500 to-blue-600 bg-clip-text text-transparent">
                 Matters Most
               </span>
             </h1>
 
-            <p class="text-xl text-slate-600 leading-relaxed max-w-lg animate-slide-right" style="animation-delay: 0.3s">
-              "Your trusted Mags clinic, now completely digital. Skip the waiting room book expert medical care and view real-time doctor schedules instantly."
+            <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0 animate-slide-right" style="animation-delay: 0.3s">
+              Your trusted Mags clinic, now completely digital. Skip the waiting room — book expert medical care and view real-time doctor schedules instantly.
             </p>
 
-            <div class="flex gap-4 animate-slide-right" style="animation-delay: 0.4s">
-              <button @click="openBookingModal()" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all flex items-center gap-2 hover:scale-105 cursor-pointer">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-slide-right justify-center lg:justify-start" style="animation-delay: 0.4s">
+              <button @click="openBookingModal()" class="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl font-bold text-base sm:text-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-105 cursor-pointer">
                 Book Appointment
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </button>
-              <a href="#footer" class="px-8 py-4 border-2 border-blue-500 text-blue-600 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all hover:scale-105 flex items-center justify-center">
+              <a href="#footer" class="px-6 sm:px-8 py-3 sm:py-4 border-2 border-blue-500 text-blue-600 rounded-xl font-bold text-base sm:text-lg hover:bg-blue-50 transition-all hover:scale-105 flex items-center justify-center">
                 Contact Us
               </a>
             </div>
 
             <!-- Stats -->
-            <div class="grid grid-cols-3 gap-6 pt-8">
+            <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-4 sm:pt-8">
               <div v-for="(stat, idx) in stats" :key="idx" class="text-center" :style="{ animationDelay: `${0.5 + idx * 0.1}s` }">
-                <div class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
+                <div class="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
                   <span v-if="statsVisible">{{ stat.value }}{{ stat.suffix }}</span>
                 </div>
-                <p class="text-slate-600 text-sm mt-2">{{ stat.label }}</p>
+                <p class="text-slate-600 text-xs sm:text-sm mt-1 sm:mt-2">{{ stat.label }}</p>
               </div>
             </div>
           </div>
 
           <!-- 3D Card with Enhanced Animations -->
-          <div class="relative h-96 lg:h-[500px] animate-scale-in">
+          <div class="relative h-72 sm:h-96 lg:h-[500px] animate-scale-in mx-4 sm:mx-8 lg:mx-0">
             <div
               class="absolute inset-0 bg-gradient-to-br from-blue-400 to-emerald-400 rounded-3xl shadow-2xl animate-float"
               style="filter: blur(40px); opacity: 0.3"
             />
             <div
-              class="absolute inset-0 rounded-3xl shadow-2xl overflow-hidden group hover:shadow-2xl transition-all hover:scale-105 hover:rotate-y-12 duration-500 flex flex-col justify-center items-center text-white"
+              class="absolute inset-4 sm:inset-0 rounded-3xl shadow-2xl overflow-hidden group hover:shadow-2xl transition-all hover:scale-105 duration-500 flex flex-col justify-center items-center text-white"
               style="perspective: 1200px"
             >
               <!-- Doctor Background Image -->
@@ -102,31 +127,30 @@
               
               <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine z-0" />
 
-              <h3 class="text-4xl font-extrabold text-center relative z-10 font-sans tracking-wide">Mags Magscare</h3>
-              <p class="text-center mt-3 text-white/90 text-lg relative z-10 font-medium">Expert care at your fingertips</p>
+              <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center relative z-10 font-sans tracking-wide">Mags Magscare</h3>
+              <p class="text-center mt-2 sm:mt-3 text-white/90 text-sm sm:text-lg relative z-10 font-medium">Expert care at your fingertips</p>
 
               <div
-                class="absolute top-6 left-6 bg-white/20 backdrop-blur px-4 py-2 rounded-full border border-white/30 z-20 animate-float"
+                class="absolute top-4 sm:top-6 left-4 sm:left-6 bg-white/20 backdrop-blur px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/30 z-20 animate-float"
                 style="animation-delay: 0.3s"
               >
-                <p class="text-sm font-semibold text-white">Verified & Trusted</p>
+                <p class="text-xs sm:text-sm font-semibold text-white">Verified & Trusted</p>
               </div>
             </div>
 
-            <!-- Floating Elements -->
-            <div class="absolute -top-8 -right-8 w-32 h-32 bg-blue-100 rounded-2xl p-4 text-blue-600 shadow-xl animate-float" style="animation-delay: 0.2s">
+            <!-- Floating Elements — hidden on small screens to prevent overflow -->
+            <div class="hidden sm:block absolute -top-6 -right-6 lg:-top-8 lg:-right-8 w-24 h-24 lg:w-32 lg:h-32 bg-blue-100 rounded-2xl p-3 lg:p-4 text-blue-600 shadow-xl animate-float" style="animation-delay: 0.2s">
               <div class="flex flex-col items-center justify-center h-full">
-                <svg class="w-8 h-8 fill-current mb-2" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 lg:w-8 lg:h-8 fill-current mb-1 lg:mb-2" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                 </svg>
                 <p class="text-xs font-bold text-center">4.9 Rating</p>
               </div>
             </div>
 
-            <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-emerald-100 rounded-2xl p-4 text-emerald-600 shadow-xl animate-float" style="animation-delay: 0.4s">
+            <div class="hidden sm:block absolute -bottom-6 -left-6 lg:-bottom-8 lg:-left-8 w-24 h-24 lg:w-32 lg:h-32 bg-emerald-100 rounded-2xl p-3 lg:p-4 text-emerald-600 shadow-xl animate-float" style="animation-delay: 0.4s">
               <div class="flex flex-col items-center justify-center h-full">
-                <!-- 24/7 Support Headset Icon - Fixed layout, no cropping -->
-                <svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 lg:w-8 lg:h-8 mb-1 lg:mb-2 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/>
                 </svg>
                 <p class="text-xs font-bold text-center">24/7 Support</p>
@@ -137,14 +161,14 @@
       </section>
 
       <!-- Services Section -->
-      <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur">
+      <section id="services" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-20 reveal-on-scroll reveal-fade-up">
-            <span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+          <div class="text-center mb-12 sm:mb-20 reveal-on-scroll reveal-fade-up">
+            <span class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               Our Services
             </span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-slate-900 mb-6">Comprehensive Care Solutions</h2>
-            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 mb-4 sm:mb-6">Comprehensive Care Solutions</h2>
+            <p class="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto">
               Everything you need for optimal health and wellness in one place
             </p>
           </div>
@@ -183,13 +207,13 @@
       </section>
 
       <!-- How It Works -->
-      <section id="how-it-works" class="py-24 px-4 sm:px-6 lg:px-8">
+      <section id="how-it-works" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-20 reveal-on-scroll reveal-fade-up">
-            <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold mb-4">
+          <div class="text-center mb-12 sm:mb-20 reveal-on-scroll reveal-fade-up">
+            <span class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-emerald-100 text-emerald-700 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               Simple Process
             </span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-slate-900 mb-6">Book in 3 Easy Steps</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 mb-4 sm:mb-6">Book in 3 Easy Steps</h2>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -217,13 +241,13 @@
       </section>
 
       <!-- Doctors Section -->
-      <section id="doctors" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-emerald-50">
+      <section id="doctors" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-emerald-50">
         <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-20 reveal-on-scroll reveal-fade-up">
-            <span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+          <div class="text-center mb-12 sm:mb-20 reveal-on-scroll reveal-fade-up">
+            <span class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               Expert Team
             </span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-slate-900 mb-6">Meet Our Doctors</h2>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 mb-4 sm:mb-6">Meet Our Doctors</h2>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -289,30 +313,30 @@
       <!-- Testimonials -->
 
       <!-- CTA Section -->
-      <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 to-emerald-500">
+      <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 to-emerald-500">
         <div class="max-w-4xl mx-auto text-center reveal-on-scroll reveal-scale-in">
-          <h2 class="text-5xl lg:text-6xl font-bold text-white mb-6">Ready to Book Your Appointment?</h2>
-          <p class="text-xl text-white/90 mb-8">Join thousands of satisfied patients who trust us with their Magscare needs</p>
-          <button @click="openBookingModal()" class="px-10 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6">Ready to Book Your Appointment?</h2>
+          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 sm:mb-8">Join thousands of satisfied patients who trust us with their Magscare needs</p>
+          <button @click="openBookingModal()" class="px-8 sm:px-10 py-3 sm:py-4 bg-white text-blue-600 rounded-xl font-bold text-base sm:text-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
             Get Started Now
           </button>
         </div>
       </section>
 
       <!-- Footer -->
-      <footer id="footer" class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div>
+      <footer id="footer" class="bg-slate-900 text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
+          <div class="sm:col-span-2 lg:col-span-1">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center font-bold">H</div>
               <span class="font-bold text-lg">MagsCare</span>
             </div>
-            <p class="text-slate-400">Your trusted Magscare partner for quality medical services and expert care.</p>
+            <p class="text-slate-400 text-sm sm:text-base">Your trusted Magscare partner for quality medical services and expert care.</p>
           </div>
 
           <div>
-            <h4 class="font-bold mb-4 text-lg">Quick Links</h4>
-            <ul class="space-y-2 text-slate-400">
+            <h4 class="font-bold mb-3 sm:mb-4 text-base sm:text-lg">Quick Links</h4>
+            <ul class="space-y-2 text-slate-400 text-sm sm:text-base">
               <li><a href="#services" class="hover:text-white transition">Services</a></li>
               <li><a href="#doctors" class="hover:text-white transition">Doctors</a></li>
               <li><a href="#testimonials" class="hover:text-white transition">About Us</a></li>
@@ -320,8 +344,8 @@
           </div>
 
           <div>
-            <h4 class="font-bold mb-4 text-lg">Contact</h4>
-            <ul class="space-y-2 text-slate-400">
+            <h4 class="font-bold mb-3 sm:mb-4 text-base sm:text-lg">Contact</h4>
+            <ul class="space-y-2 text-slate-400 text-sm sm:text-base">
               <li class="flex items-center gap-2">📞 +1 (555) 123-4567</li>
               <li class="flex items-center gap-2">📧 info@Magscare.com</li>
               <li class="flex items-center gap-2">📍 123 Medical Ave</li>
@@ -329,12 +353,12 @@
           </div>
 
           <div>
-            <h4 class="font-bold mb-4 text-lg">Hours</h4>
-            <p class="text-slate-400">Monday - Friday: 8am - 6pm<br />Saturday: 9am - 4pm<br />Sunday: Closed</p>
+            <h4 class="font-bold mb-3 sm:mb-4 text-base sm:text-lg">Hours</h4>
+            <p class="text-slate-400 text-sm sm:text-base">Monday - Friday: 8am - 6pm<br />Saturday: 9am - 4pm<br />Sunday: Closed</p>
           </div>
         </div>
 
-        <div class="border-t border-slate-700 pt-8 text-center text-slate-400">
+        <div class="border-t border-slate-700 pt-6 sm:pt-8 text-center text-slate-400 text-sm sm:text-base">
           <p>&copy; 2026 MagsCare Pro. All rights reserved.</p>
         </div>
       </footer>
@@ -344,11 +368,11 @@
     <Teleport to="body">
       <div
         v-if="isBookingModalOpen"
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md transition-opacity duration-300"
+        class="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/60 backdrop-blur-md transition-opacity duration-300"
         @click.self="closeBookingModal"
       >
         <div
-          class="relative w-full max-w-lg bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-6 sm:p-8 overflow-hidden transform transition-all duration-500 scale-100 hover:shadow-3xl animate-scale-in"
+          class="relative w-full max-w-lg bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 overflow-hidden transform transition-all duration-500 scale-100 hover:shadow-3xl animate-scale-in max-h-[90dvh] overflow-y-auto"
           style="perspective: 1200px"
         >
           <!-- Floating decorative bubble in background of modal -->
@@ -493,6 +517,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { getDoctors, requestAppointment } from '@services/api';
+
+const mobileMenuOpen = ref(false);
 
 const isBookingModalOpen = ref(false);
 const successMsg = ref('');
