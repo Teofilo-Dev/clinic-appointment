@@ -18,8 +18,17 @@
     <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/10 animate-slide-down" style="background: linear-gradient(to right, #3b6fd4, #10d9a0);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center font-bold text-sm sm:text-base" style="background:white;">
-            <span class="bg-gradient-to-br from-blue-500 to-emerald-400 bg-clip-text text-transparent">H</span>
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center" style="background:white;">
+            <svg class="w-5.5 h-5.5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none">
+              <defs>
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3b6fd4" />
+                  <stop offset="100%" stop-color="#10d9a0" />
+                </linearGradient>
+              </defs>
+              <rect x="10" y="4" width="4" height="16" rx="1.5" fill="url(#logoGrad)" />
+              <rect x="4" y="10" width="16" height="4" rx="1.5" fill="url(#logoGrad)" />
+            </svg>
           </div>
           <span class="font-bold text-base sm:text-lg text-white">MagsCare</span>
         </div>
@@ -328,7 +337,12 @@
         <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
           <div class="sm:col-span-2 lg:col-span-1">
             <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center font-bold">H</div>
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                  <rect x="10" y="4" width="4" height="16" rx="1.5" fill="white" />
+                  <rect x="4" y="10" width="16" height="4" rx="1.5" fill="white" />
+                </svg>
+              </div>
               <span class="font-bold text-lg">MagsCare</span>
             </div>
             <p class="text-slate-400 text-sm sm:text-base">Your trusted Magscare partner for quality medical services and expert care.</p>

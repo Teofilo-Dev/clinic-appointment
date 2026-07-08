@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b6fd4" />
+      <stop offset="100%" stop-color="#10d9a0" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded container with the beautiful blue-teal gradient -->
+  <rect width="32" height="32" rx="8" fill="url(#grad)" />
+  <!-- A clean white medical heart and cross concept -->
+  <path d="M16 22.5s-6-3.8-6-7.5a3.5 3.5 0 0 1 6-2.5 3.5 3.5 0 0 1 6 2.5c0 3.7-6 7.5-6 7.5z" fill="white" />
+  <path d="M16 11.5v6M13 14.5h6" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" />
+</svg>
